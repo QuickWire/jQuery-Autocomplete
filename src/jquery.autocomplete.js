@@ -1,5 +1,5 @@
 /**
-*  Ajax Autocomplete for jQuery, version %version%
+*  Ajax Autocomplete for jQuery, version 1.4.10
 *  (c) 2017 Tomas Kirda
 *
 *  Ajax Autocomplete for jQuery is freely distributable under the terms of an MIT-style license.
@@ -163,7 +163,7 @@
                 options = that.options,
                 container;
 
-            that.element.setAttribute('autocomplete', 'off');
+            that.element.setAttribute('autocomplete', 'no'); //bmiller, changed from off to no - as per chrome
 
             // html() deals with many types: htmlString or Element or Array or jQuery
             that.noSuggestionsContainer = $('<div class="autocomplete-no-suggestion"></div>')
@@ -219,10 +219,6 @@
         onFocus: function () {
             var that = this;
 
-            if (that.disabled) {
-                return;
-            }
-
             that.fixPosition();
 
             if (that.el.val().length >= that.options.minChars) {
@@ -274,7 +270,7 @@
                 'z-index': options.zIndex
             });
 
-            this.options = options;
+            this.options = options;            
         },
 
 
@@ -582,7 +578,7 @@
 
                 ajaxSettings = {
                     url: serviceUrl,
-                    data: params,
+					data: JSON.stringify(params), //bmiller, had to stringify the object myself for POST, should have been a options.callback
                     type: options.type,
                     dataType: options.dataType
                 };

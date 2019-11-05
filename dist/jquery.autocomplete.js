@@ -163,7 +163,7 @@
                 options = that.options,
                 container;
 
-            that.element.setAttribute('autocomplete', 'off');
+            that.element.setAttribute('autocomplete', 'no'); //bmiller, changed from off to no - as per chrome
 
             // html() deals with many types: htmlString or Element or Array or jQuery
             that.noSuggestionsContainer = $('<div class="autocomplete-no-suggestion"></div>')
@@ -578,7 +578,7 @@
 
                 ajaxSettings = {
                     url: serviceUrl,
-                    data: params,
+					data: JSON.stringify(params), //bmiller, had to stringify the object myself for POST, should have been a options.callback
                     type: options.type,
                     dataType: options.dataType
                 };
