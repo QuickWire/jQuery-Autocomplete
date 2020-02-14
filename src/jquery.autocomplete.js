@@ -578,7 +578,8 @@
 
                 ajaxSettings = {
                     url: serviceUrl,
-					data: JSON.stringify(params), //bmiller, had to stringify the object myself for POST, should have been a options.callback
+                    //data: JSON.stringify(params), //bmiller, had to stringify the object myself for POST, should have been a options.callback
+                    data: params,
                     type: options.type,
                     dataType: options.dataType
                 };
