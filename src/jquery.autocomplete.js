@@ -413,11 +413,19 @@
                     }
                     break;
                 case keys.RETURN:
+                    /*bmiller - always close when enter hit
                     if (that.selectedIndex === -1) {
                         that.hide();
                         return;
                     }
                     that.select(that.selectedIndex);
+                    break
+                    */
+                    if (that.selectedIndex !== -1)
+                        that.select(that.selectedIndex);
+                    else
+                        that.select(0);// just take the top one...
+                    that.hide();
                     break;
                 case keys.UP:
                     that.moveUp();
@@ -444,6 +452,7 @@
             switch (e.which) {
                 case keys.UP:
                 case keys.DOWN:
+                case keys.RETURN: //bmiller, allows hide after enter to select
                     return;
             }
 
@@ -578,8 +587,7 @@
 
                 ajaxSettings = {
                     url: serviceUrl,
-                    //data: JSON.stringify(params), //bmiller, had to stringify the object myself for POST, should have been a options.callback
-                    data: params,
+					data: params,
                     type: options.type,
                     dataType: options.dataType
                 };
